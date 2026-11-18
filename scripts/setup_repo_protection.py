@@ -151,6 +151,23 @@ def apply_branch_protection(repo: str, *, dry_run: bool) -> None:
     )
 
 
+def _enabled(field: Any) -> bool:
+    """Read a protection flag that the API may return as an object or a bool.
+
+    ``GET .../protection`` returns some flags as ``{"enabled": true}`` objects and
+    others as bare booleans, so both shapes must be handled.
+
+    Args:
+        field: Either ``{"enabled": bool}``, a bare boolean or ``None``.
+
+    Returns:
+        True only when the flag is explicitly enabled.
+    """
+    if isinstance(field, dict):
+        return field.get("enabled") is True
+    return field is True
+
+
 def verify(repo: str) -> int:
     """Print the effective configuration and its conformance checklist.
 
@@ -194,15 +211,12 @@ def verify(repo: str) -> int:
         ("branches must be up to date", status_checks.get("strict") is True),
         (
             "conversation resolution required",
-            protection.get("required_conversation_resolution") is True,
+            _enabled(protection.get("required_conversation_resolution")),
         ),
-        ("linear history required", protection.get("required_linear_history") is True),
-        (
-            "force pushes blocked",
-            (protection.get("allow_force_pushes") or {}).get("enabled") is False,
-        ),
-        ("deletions blocked", (protection.get("allow_deletions") or {}).get("enabled") is False),
-        ("admins cannot bypass", (protection.get("enforce_admins") or {}).get("enabled") is True),
+        ("linear history required", _enabled(protection.get("required_linear_history"))),
+        ("force pushes blocked", not _enabled(protection.get("allow_force_pushes"))),
+        ("deletions blocked", not _enabled(protection.get("allow_deletions"))),
+        ("admins cannot bypass", _enabled(protection.get("enforce_admins"))),
     ]
 
     width = max(len(name) for name, _ in checks)
