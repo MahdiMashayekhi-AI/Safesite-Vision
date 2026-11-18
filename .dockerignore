@@ -1,0 +1,47 @@
+# Keep the build context small and the cache stable.
+
+# Version control and CI
+.git
+.gitignore
+.gitattributes
+.github
+
+# Python environments and caches
+.venv*
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Data, model weights and run artefacts (never baked into the image)
+data/
+models/
+runs/
+notebooks/
+wandb/
+mlruns/
+
+# Local-only files
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Documentation and tests are not needed at runtime
+docs/
+tests/
+scripts/
+
+# Keep metadata that the build reads
+!README.md
