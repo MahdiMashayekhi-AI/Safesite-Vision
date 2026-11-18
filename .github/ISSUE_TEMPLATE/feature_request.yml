@@ -1,0 +1,91 @@
+name: Feature request
+description: Propose new functionality or an improvement to the pipeline or tooling.
+title: "feat: "
+labels: ["type:feat"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the problem before the solution. Check the roadmap in
+        `README.md` — the feature may already be planned.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user or engineering problem does this solve?
+      placeholder: "Safety officers need violations grouped per zone, but rules currently only support `zone: all`."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behaviour you want, including config/schema changes.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Data pipeline (download, convert, split)
+        - Detection (YOLO)
+        - Tracking (ByteTrack)
+        - Association (PPE to person)
+        - Compliance engine (rules, smoothing, events)
+        - API / Streamlit demo
+        - CI / tooling / packaging
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Proposed priority
+      options:
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches, and why they are worse.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: How will we know this is done? Bullet points, testable.
+      placeholder: |
+        - [ ] `zones.enabled: true` restricts rules to their polygon
+        - [ ] Unit test covers a person inside and outside the zone
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: References, papers, screenshots.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I searched existing issues and the roadmap for duplicates.
+          required: true

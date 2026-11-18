@@ -1,0 +1,105 @@
+name: Bug report
+description: Report a defect in detection, tracking, compliance logic, the API or tooling.
+title: "fix: "
+labels: ["type:fix"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please search existing issues first, and **do not** paste
+        real site footage or personal data — use synthetic or blurred samples.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences describing the defect.
+      placeholder: "Violations are reported twice per person when the vest is partially occluded."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the pipeline is affected?
+      options:
+        - Data pipeline (download, convert, split)
+        - Detection (YOLO)
+        - Tracking (ByteTrack)
+        - Association (PPE to person)
+        - Compliance engine (rules, smoothing, events)
+        - API / Streamlit demo
+        - CI / tooling / packaging
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, deterministic steps.
+      placeholder: |
+        1. `uv sync --all-groups`
+        2. `uv run python scripts/train.py --config configs/train_baseline.yaml`
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Include the traceback, log excerpt or wrong metric values.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: Release tag or commit SHA.
+      placeholder: "v0.1.0 or 3f9d1af"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Paste the output of `uv --version`, `python --version`, OS, and GPU/driver if relevant.
+      placeholder: |
+        uv 0.13.9
+        Python 3.12.13
+        Windows 11 / Ubuntu 26.04
+        CPU only (or GPU model + driver)
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Screenshots, sample config, hypothesis about the cause.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: This report contains no personal data, credentials or real site footage.
+          required: true

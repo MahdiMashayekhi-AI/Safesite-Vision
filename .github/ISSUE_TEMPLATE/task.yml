@@ -1,0 +1,86 @@
+name: Task
+description: A scoped unit of engineering work (refactor, CI, docs, data, experiment).
+title: "chore: "
+labels: ["type:chore"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for work that is neither a bug nor a user-facing feature.
+        Link the roadmap phase/milestone so the issue shows up on the board.
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should be true when this task is done?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Concrete checklist of the work.
+      placeholder: |
+        - [ ] Add `configs/zone.yaml`
+        - [ ] Validate zones with pydantic
+        - [ ] Document the schema in `docs/architecture.md`
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Data pipeline (download, convert, split)
+        - Detection (YOLO)
+        - Tracking (ByteTrack)
+        - Association (PPE to person)
+        - Compliance engine (rules, smoothing, events)
+        - API / Streamlit demo
+        - CI / tooling / packaging
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+
+  - type: input
+    id: phase
+    attributes:
+      label: Roadmap phase
+      description: Phase 0-6 from the README roadmap, if applicable.
+      placeholder: "Phase 4 - Compliance engine"
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / dependencies
+      description: Blockers, related issues, implementation hints.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I checked that no existing issue covers this task.
+          required: true
+        - label: The task is small enough for a single pull request.
+          required: true

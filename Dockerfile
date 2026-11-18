@@ -27,8 +27,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-default-groups --group app
 
-# Layer 2: the project itself.
-COPY pyproject.toml uv.lock README.md ./
+# Layer 2: the project itself. LICENSE and README are required by the build
+# backend (PEP 639 license-files and readme), so both must be present here.
+COPY pyproject.toml uv.lock README.md LICENSE ./
 COPY src ./src
 COPY app ./app
 COPY configs ./configs
