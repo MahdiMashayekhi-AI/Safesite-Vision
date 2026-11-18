@@ -1,0 +1,15 @@
+# ByteTrack configuration passed to Ultralytics via model.track(tracker=...).
+# Reference: https://docs.ultralytics.com/modes/track/
+tracker_type: bytetrack
+
+# Detection confidence gates
+track_high_thresh: 0.5   # first association pass
+track_low_thresh: 0.1    # second association pass (recover occluded boxes)
+new_track_thresh: 0.6    # confidence required to spawn a new track
+
+# Track lifecycle
+track_buffer: 30         # frames a lost track is kept alive
+match_thresh: 0.8        # IoU matching threshold
+
+# Fuse detection score into the matching cost
+fuse_score: true

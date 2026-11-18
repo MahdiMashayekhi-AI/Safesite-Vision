@@ -1,0 +1,70 @@
+# Compliance rule engine configuration (initial draft, Phase 4 finalises it).
+#
+# Class names referenced here must exist in configs/data.yaml.
+
+version: 1
+
+# Positive equipment classes: a detection of these classes satisfies a
+# requirement for the matching equipment slot.
+equipment_classes:
+  helmet: [helmet]
+  vest: [vest]
+  gloves: [gloves]
+  boots: [boots]
+  goggles: [goggles]
+
+# Explicit negative classes: a confident detection of these means the person is
+# *not* wearing the equipment, which is a stronger signal than absence of a box.
+missing_indicators:
+  helmet: no_helmet
+  vest: no_vest
+  gloves: no_gloves
+  boots: no_boots
+  goggles: no_goggles
+
+# PPE-to-person association heuristics.
+association:
+  iou_threshold: 0.10       # minimum IoU to consider a PPE box owned by a person
+  center_inside_person: true # a PPE box centred inside the person box is owned
+  max_distance_ratio: 0.35  # max normalised centre distance to the person box
+
+# Temporal smoothing: a violation must persist before it is reported.
+temporal:
+  window_frames: 30
+  min_consecutive_frames: 12
+  cooldown_seconds: 10.0
+
+# Rule definitions. `severity` drives alerting and downstream reporting.
+rules:
+  - id: PPE-001
+    name: Helmet required
+    description: Every tracked person must wear a hard hat.
+    severity: high
+    zone: all
+    required: [helmet]
+
+  - id: PPE-002
+    name: High-visibility vest required
+    description: Every tracked person must wear a high-visibility vest.
+    severity: high
+    zone: all
+    required: [vest]
+
+  - id: PPE-003
+    name: Gloves required in material handling area
+    description: Gloves are mandatory inside the material handling zone.
+    severity: medium
+    zone: material_handling
+    required: [gloves]
+
+  - id: PPE-004
+    name: Safety boots recommended
+    description: Safety boots should be worn in the yard.
+    severity: low
+    zone: yard
+    required: [boots]
+
+# Optional polygon zones in normalised coordinates. Disabled for the baseline.
+zones:
+  enabled: false
+  definitions: []

@@ -1,0 +1,26 @@
+# Ultralytics dataset definition for PPE detection.
+#
+# Paths are relative to the repository root. Actual images/labels live under
+# data/processed/ and are never committed (see .gitignore).
+#
+# Source datasets and their licences are tracked in docs/datasets.md.
+# Only datasets that permit research and commercial use may be added here.
+
+path: data/processed/ppe
+train: images/train
+val: images/val
+test: images/test
+
+# Class order is part of the model contract: never reorder, only append.
+names:
+  0: person
+  1: helmet
+  2: no_helmet
+  3: vest
+  4: no_vest
+  5: gloves
+  6: no_gloves
+  7: boots
+  8: no_boots
+  9: goggles
+  10: no_goggles

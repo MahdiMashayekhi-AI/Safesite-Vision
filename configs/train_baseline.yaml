@@ -1,0 +1,41 @@
+# Baseline Ultralytics training configuration.
+# Usage: uv run python scripts/train.py --config configs/train_baseline.yaml
+#
+# Keep this file in sync with the arguments accepted by scripts/train.py.
+
+model: yolo11n.pt
+data: configs/data.yaml
+
+epochs: 100
+imgsz: 640
+batch: 16
+device: auto
+workers: 8
+patience: 20
+
+# Optimiser
+optimizer: auto
+lr0: 0.01
+lrf: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 3.0
+cos_lr: true
+close_mosaic: 10
+
+# Augmentation (safety-site footage is highly variable in lighting)
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+fliplr: 0.5
+mosaic: 1.0
+mixup: 0.0
+
+# Reproducibility and output
+seed: 42
+deterministic: true
+project: runs/train
+name: baseline
+exist_ok: false
+val: true
+plots: true
