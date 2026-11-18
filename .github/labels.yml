@@ -1,0 +1,60 @@
+# Source of truth for repository labels.
+#
+# Apply (idempotent, creates or updates) with:
+#   uv run python scripts/setup_labels.py
+#
+# Keep this file in sync with the labels referenced by the issue templates in
+# .github/ISSUE_TEMPLATE/ and by .github/dependabot.yml.
+
+labels:
+  # --- Type ------------------------------------------------------------------
+  - name: "type:feat"
+    color: "1D76DB"
+    description: "New feature or capability"
+  - name: "type:fix"
+    color: "D73A4A"
+    description: "Bug fix"
+  - name: "type:docs"
+    color: "0075CA"
+    description: "Documentation only"
+  - name: "type:ci"
+    color: "5319E7"
+    description: "CI/CD, workflows or release tooling"
+  - name: "type:chore"
+    color: "C2E0C6"
+    description: "Maintenance, dependencies, refactor without behaviour change"
+
+  # --- Area ------------------------------------------------------------------
+  - name: "area:data"
+    color: "FBCA04"
+    description: "Dataset acquisition, conversion, deduplication and splits"
+  - name: "area:model"
+    color: "F9D0C4"
+    description: "Detection model, training, evaluation and export"
+  - name: "area:compliance"
+    color: "BFD4F2"
+    description: "Rule engine, association, temporal smoothing and events"
+  - name: "area:deploy"
+    color: "0E8A16"
+    description: "Serving, Docker image, releases and infrastructure"
+
+  # --- Priority --------------------------------------------------------------
+  - name: "priority:high"
+    color: "B60205"
+    description: "Blocks progress or affects correctness; do next"
+  - name: "priority:medium"
+    color: "FBCA04"
+    description: "Important, schedule in the current phase"
+  - name: "priority:low"
+    color: "0E8A16"
+    description: "Nice to have, no deadline"
+
+  # --- Community -------------------------------------------------------------
+  - name: "good first issue"
+    color: "7057FF"
+    description: "Small, well-scoped task suitable for a first contribution"
+
+  # --- Automation ------------------------------------------------------------
+  - name: "dependencies"
+    color: "0366D6"
+    description: "Dependency updates (Dependabot)"
