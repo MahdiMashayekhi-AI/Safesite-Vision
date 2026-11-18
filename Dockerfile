@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------------------
 # Builder: resolve and install the runtime dependency set with uv
 # -----------------------------------------------------------------------------
-FROM python:3.12-slim AS builder
+FROM python:3.15-slim AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:0.13.9 /uv /uvx /bin/
 
@@ -39,7 +39,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # -----------------------------------------------------------------------------
 # Runtime: slim image, non-root user, no build toolchain
 # -----------------------------------------------------------------------------
-FROM python:3.12-slim AS runtime
+FROM python:3.15-slim AS runtime
 
 LABEL org.opencontainers.image.title="SafeSite Vision" \
       org.opencontainers.image.description="PPE detection and safety compliance API" \
