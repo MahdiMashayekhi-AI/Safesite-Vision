@@ -16,9 +16,7 @@ app = typer.Typer(add_completion=False, no_args_is_help=True)
 
 @app.command()
 def main(
-    weights: str = typer.Option(
-        ..., "--weights", "-w", help="Path to the model checkpoint."
-    ),
+    weights: str = typer.Option(..., "--weights", "-w", help="Path to the model checkpoint."),
     data: str = typer.Option("configs/data.yaml", help="Dataset definition."),
     split: str = typer.Option("val", help="Split to evaluate: val or test."),
     imgsz: int = typer.Option(640, help="Inference image size."),

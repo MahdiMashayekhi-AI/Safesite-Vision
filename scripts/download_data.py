@@ -19,19 +19,13 @@ app = typer.Typer(add_completion=False, no_args_is_help=True)
 
 @app.command()
 def main(
-    dataset: str = typer.Option(
-        ..., "--dataset", "-d", help="Registered dataset key to download."
-    ),
+    dataset: str = typer.Option(..., "--dataset", "-d", help="Registered dataset key to download."),
     output_dir: str = typer.Option("data/raw", help="Destination directory."),
-    force: bool = typer.Option(
-        False, "--force", help="Re-download even if the data exists."
-    ),
+    force: bool = typer.Option(False, "--force", help="Re-download even if the data exists."),
 ) -> None:
     """Download ``dataset`` into ``output_dir``."""
     del output_dir, force
-    raise NotImplementedError(
-        f"download_data is not implemented yet (requested: {dataset!r})"
-    )
+    raise NotImplementedError(f"download_data is not implemented yet (requested: {dataset!r})")
 
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation only
