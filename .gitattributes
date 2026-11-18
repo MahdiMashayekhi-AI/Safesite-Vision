@@ -1,0 +1,22 @@
+# Normalise line endings across the team (Windows + Linux/macOS).
+* text=auto eol=lf
+
+# Binary assets must never be normalised.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pt binary
+*.pth binary
+*.onnx binary
+*.engine binary
+*.mp4 binary
+*.avi binary
+*.npy binary
+*.npz binary
+*.pkl binary
+*.zip binary
+*.gz binary
+
+# Keep the lockfile diff meaningful for reviewers.
+uv.lock text eol=lf

@@ -221,3 +221,54 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==========================================================================
+# SafeSite Vision - ML / MLOps
+# ==========================================================================
+
+# Datasets and derived artifacts (never commit data; keep the folders)
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/**/.gitkeep
+
+# Model weights and exported graphs
+models/*
+!models/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+*.mlpackage
+*.torchscript
+
+# Training / inference outputs
+runs/*
+!runs/.gitkeep
+predictions/
+outputs/
+*.mp4
+*.avi
+
+# Experiment tracking
+wandb/
+mlruns/
+mlflow.db
+lightning_logs/
+catboost_info/
+*.ckpt
+
+# Notebook / dataset tooling caches
+.hydra/
+optuna/
+*.sqlite3
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
