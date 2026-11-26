@@ -67,9 +67,9 @@ protected branch.
    `.github/pull_request_template.md` and ending the description with `Closes #<issue>`.
 5. **CI must be green.** Required checks: `ci-success` (lint + typecheck + tests) and
    `pr-title`. A failing or pending check blocks merging.
-6. **Review.** At least **one approving review from someone other than the author** is
-   required, and all review conversations must be resolved. `CODEOWNERS` is enforced, so
-   the affected area's owner is requested automatically.
+6. **Review.** Collaborator PRs require approval from `@MahdiMashayekhi-AI`, the
+   code owner for every path. The owner may merge their own PR using the review-only
+   administrator bypass. Everyone still needs a PR, green CI and resolved conversations.
 7. **Squash merge.** The merge commit becomes one Conventional Commit on `main`; the head
    branch is deleted automatically.
 8. **Sync** locally: `git checkout main && git pull`.
@@ -146,16 +146,21 @@ in the footer marks a breaking change.
 
 ## Review rules
 
-- **Minimum one approval** from someone other than the author — you cannot approve your own
-  PR, and the branch protection ruleset enforces this.
-- **Code owners are required reviewers** for the areas they own (`CODEOWNERS`).
+- **Collaborator PRs require the project owner's approval.** `CODEOWNERS` assigns every
+  path to `@MahdiMashayekhi-AI`. Keep collaborators at the write role.
+- **Owner PRs can be merged without another reviewer.** A separate review ruleset
+  grants the sole administrator a pull-request-only review bypass. GitHub does not
+  support self-approval; use the merge/bypass option instead.
+- **Nobody can push directly to main**, including the owner. Classic protection
+  enforces PRs, green CI, up-to-date branches and resolved conversations for everyone.
 - Reviews check, in order: correctness, test coverage of the change, boundary handling,
   config/schema compatibility, naming and docs.
 - A new commit **dismisses stale approvals** — re-request a review after pushing changes.
 - Resolve every conversation before merging; do not self-resolve a reviewer's comment.
 - Reviewers: respond with a clear block/approve decision, or `nit:` for non-blocking
   suggestions.
-- Do not merge with failing or skipped required checks, and do not bypass protection.
+- Do not merge with failing or skipped required checks. Only the owner may bypass
+  the separate review layer; the PR and CI baseline remains mandatory.
 
 ## Data and model rules
 

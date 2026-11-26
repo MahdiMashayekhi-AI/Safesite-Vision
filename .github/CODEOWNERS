@@ -1,54 +1,5 @@
-# CODEOWNERS
-#
-# Owners are requested automatically for pull requests touching these paths, and
-# "Require review from Code Owners" is enabled on the main branch ruleset.
-# Syntax: <pattern> <owner>...
-# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-
-# Fallback: both maintainers review everything.
-*                               @MahdiMashayekhi-AI @Mohii722
-
-# --- Repository, CI/CD and delivery -----------------------------------------
-/.github/                       @MahdiMashayekhi-AI
-/.github/workflows/             @MahdiMashayekhi-AI
-/Dockerfile                     @MahdiMashayekhi-AI
-/.dockerignore                  @MahdiMashayekhi-AI
-/.pre-commit-config.yaml        @MahdiMashayekhi-AI
-/.editorconfig                  @MahdiMashayekhi-AI
-/pyproject.toml                 @MahdiMashayekhi-AI
-/uv.lock                        @MahdiMashayekhi-AI
-/Makefile                       @MahdiMashayekhi-AI
-
-# --- Community and governance ------------------------------------------------
-/README.md                      @MahdiMashayekhi-AI
-/CONTRIBUTING.md                @MahdiMashayekhi-AI
-/CODE_OF_CONDUCT.md             @MahdiMashayekhi-AI
-/SECURITY.md                    @MahdiMashayekhi-AI
-/LICENSE                        @MahdiMashayekhi-AI
-
-# --- Data pipeline ------------------------------------------------------------
-/src/safesite/data/             @Mohii722
-/scripts/                       @Mohii722
-/docs/datasets.md               @Mohii722
-
-# --- Perception: detection, tracking, association -----------------------------
-/src/safesite/detection/        @Mohii722
-/src/safesite/tracking/         @Mohii722
-/src/safesite/association/      @Mohii722
-/src/safesite/visualization.py  @Mohii722
-/configs/data.yaml              @Mohii722
-/configs/train_baseline.yaml    @Mohii722
-/configs/tracker.yaml           @Mohii722
-
-# --- Compliance engine and serving --------------------------------------------
-/src/safesite/compliance/       @MahdiMashayekhi-AI
-/src/safesite/pipeline.py       @MahdiMashayekhi-AI
-/src/safesite/cli.py            @MahdiMashayekhi-AI
-/app/                           @MahdiMashayekhi-AI
-/configs/compliance_rules.yaml  @MahdiMashayekhi-AI
-/docs/model_card.md             @MahdiMashayekhi-AI
-/docs/error_analysis.md         @MahdiMashayekhi-AI
-
-# --- Shared -------------------------------------------------------------------
-/tests/                         @MahdiMashayekhi-AI @Mohii722
-/docs/                          @MahdiMashayekhi-AI @Mohii722
+# The owner reviews every collaborator change, including policy changes.
+# Keep collaborators at write permission, never admin.
+# Review bypass applies to the sole admin through a PR only.
+# Classic protection still requires a PR and green CI for everyone.
+* @MahdiMashayekhi-AI
