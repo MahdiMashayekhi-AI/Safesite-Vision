@@ -29,8 +29,8 @@ behaviour to the maintainers privately.
 git clone https://github.com/MahdiMashayekhi-AI/Safesite-Vision.git
 cd Safesite-Vision
 
-uv sync --all-groups                          # creates .venv with every dependency group
-uv run pre-commit install --install-hooks     # installs pre-commit + commit-msg hooks
+uv sync --all-groups                          # creates a Python 3.12 .venv with every dependency group
+uv run pre-commit install --install-hooks     # installs pre-commit + commit-msg + pre-push hooks
 ```
 
 Verify the environment before writing code:
@@ -131,6 +131,17 @@ in the footer marks a breaking change.
 - **Config over code:** thresholds, class mappings and rule parameters belong in `configs/`,
   validated with pydantic, not hard-coded.
 - **No dead code:** delete it instead of commenting it out; git remembers.
+
+## Local security and push gates
+
+The pinned Ruff hook is `ruff-check`. Commit hooks also normalize line endings to
+LF, reject commits on main/master, and run Gitleaks against staged changes.
+Before each push, Gitleaks scans committed history and mypy plus pytest run in the
+locked project environment. CI repeats the history scan, so installing local
+hooks is not the only protection. Never skip a failing hook to publish a change.
+Gitleaks findings are redacted; resolve the cause before retrying. The runner
+downloads the pinned official release, validates its SHA-256 checksum, and caches
+it under `~/.cache/safesite/gitleaks`; Go and Docker are not required locally.
 
 ## Testing
 

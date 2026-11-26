@@ -227,13 +227,10 @@ __marimo__/
 # ==========================================================================
 
 # Datasets and derived artifacts (never commit data; keep the folders)
-data/raw/*
-data/interim/*
-data/processed/*
-!data/raw/.gitkeep
-!data/interim/.gitkeep
-!data/processed/.gitkeep
+data/**
+!data/**/
 !data/**/.gitkeep
+!data/**/*.dvc
 
 # Model weights and exported graphs
 models/*
