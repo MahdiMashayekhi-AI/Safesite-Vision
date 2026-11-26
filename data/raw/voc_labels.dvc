@@ -1,0 +1,6 @@
+outs:
+- md5: 2c15d792ef0e32b9aebd700fc6e7ae5b.dir
+  size: 19863513
+  nfiles: 8099
+  hash: md5
+  path: voc_labels

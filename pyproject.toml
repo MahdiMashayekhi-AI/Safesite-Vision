@@ -50,6 +50,7 @@ safesite = "safesite.cli:app"
 
 [dependency-groups]
 dev = [
+    "dvc>=3.67,<4",
     "mypy>=1.11",
     "pre-commit>=3.8",
     "pytest>=8.3",
