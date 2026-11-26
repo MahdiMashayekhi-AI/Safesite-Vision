@@ -45,3 +45,7 @@ scripts/
 
 # Keep metadata that the build reads
 !README.md
+
+# DVC metadata and local object cache
+.dvc/
+.dvcignore

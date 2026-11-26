@@ -37,6 +37,8 @@ COPY configs ./configs
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-editable --no-default-groups --group app
 
+RUN /app/.venv/bin/python -c "import torch; assert torch.version.cuda is None"
+
 # -----------------------------------------------------------------------------
 # Runtime: slim image, non-root user, no build toolchain
 # -----------------------------------------------------------------------------

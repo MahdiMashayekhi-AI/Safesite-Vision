@@ -1,23 +1,23 @@
 # Pre-commit hooks for SafeSite Vision.
 #
 # One-time setup per clone:
-#   uv run pre-commit install --install-hooks     # installs pre-commit + commit-msg
+#   uv run pre-commit install --install-hooks     # installs pre-commit + commit-msg + pre-push
 #
 # Run against every file:
 #   uv run pre-commit run --all-files
 #
 # Keep `ruff-pre-commit` in sync with the `ruff` version in the `dev` group.
 
-default_install_hook_types: [pre-commit, commit-msg]
+default_install_hook_types: [pre-commit, commit-msg, pre-push]
 default_stages: [pre-commit]
 fail_fast: false
 
 repos:
   # Linting and formatting ---------------------------------------------------
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.5
+    rev: v0.17.6
     hooks:
-      - id: ruff
+      - id: ruff-check
         name: ruff (lint)
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
@@ -33,6 +33,8 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-json
+      - id: no-commit-to-branch
+        args: [--branch, main, --branch, master]
       - id: check-merge-conflict
       - id: check-case-conflict
       - id: detect-private-key
@@ -52,3 +54,34 @@ repos:
         name: conventional commit message
         stages: [commit-msg]
         args: [--strict]
+
+  # Official release binaries are checksum-verified and cached by this runner.
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: gitleaks (staged changes)
+        entry: uv run --locked python scripts/run_gitleaks.py git --pre-commit --staged --redact
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+      - id: gitleaks-history
+        name: gitleaks (committed history)
+        entry: uv run --locked python scripts/run_gitleaks.py git --redact
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+      - id: mypy
+        name: mypy (pre-push)
+        entry: uv run --locked mypy src
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+      - id: pytest
+        name: pytest (pre-push)
+        entry: uv run --locked pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

@@ -6,7 +6,7 @@
 [![Docker](https://github.com/MahdiMashayekhi-AI/Safesite-Vision/actions/workflows/docker.yml/badge.svg)](https://github.com/MahdiMashayekhi-AI/Safesite-Vision/actions/workflows/docker.yml)
 [![Release](https://img.shields.io/github/v/release/MahdiMashayekhi-AI/Safesite-Vision?sort=semver)](https://github.com/MahdiMashayekhi-AI/Safesite-Vision/releases)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13-blue.svg)](pyproject.toml)
+[![Python](https://img.shields.io/badge/python-3.12-blue.svg)](pyproject.toml)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
 SafeSite Vision turns site video into actionable safety-compliance events. It detects
@@ -88,7 +88,7 @@ cd Safesite-Vision
 # Install every dependency group and create .venv
 uv sync --all-groups
 
-# Install the git hooks (ruff, formatting, commit-message check)
+# Install commit, commit-message and push hooks (includes Gitleaks, mypy and pytest)
 uv run pre-commit install --install-hooks
 
 # Quality gate, exactly what CI runs
