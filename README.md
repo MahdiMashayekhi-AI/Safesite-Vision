@@ -146,6 +146,13 @@ SafeSite-Vision/
 └── tests/                  # pytest suite
 ```
 
+## Dataset versioning
+
+SH17 is tracked with DVC. Git stores only content pointers; the external backup
+uses `E:/Datasets/SH17` on the maintainer's computer. Other clones configure their
+own local remote path before `uv run dvc pull`. See
+[dataset backup and recovery](docs/data_versioning.md) for setup and verification.
+
 ## Configuration
 
 | File | Purpose |
@@ -167,7 +174,9 @@ SafeSite-Vision/
 | **5** | Serving and demo — FastAPI endpoints, Streamlit demo, overlays, end-to-end smoke test | ⏳ Planned |
 | **6** | Hardening and release — profiling, false-positive tuning, docs completion, `v1.0.0` | ⏳ Planned |
 
-Each phase is tracked with a GitHub milestone; individual tasks live in the issue tracker.
+Each phase is tracked with a GitHub milestone; tasks are organized on the
+[Roadmap board](https://github.com/users/MahdiMashayekhi-AI/projects/2)
+(Backlog / In Progress / In Review / Done). Board access follows its GitHub visibility.
 
 ## Contributing
 

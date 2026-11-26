@@ -15,7 +15,7 @@ that introduces a dataset.
 
 | Dataset | Purpose | Images | Classes used | Licence | Commercial use | Source / version | Downloaded |
 | ------- | ------- | ------ | ------------ | ------- | -------------- | ---------------- | ---------- |
-| _TBD_   | _TBD_   | _TBD_  | _TBD_        | _TBD_   | _TBD_          | _TBD_            | _TBD_      |
+| SH17 (local raw snapshot) | PPE detection | 8,099 | Mapping pending (#14) | Review pending (#12) | Not yet verified | Maintainer-provided files; versioned with DVC | Existing local import |
 
 ## Class mapping
 
@@ -48,3 +48,14 @@ Describe how `scripts/dedup_split.py` produces `data/processed/ppe`:
 ## Known issues
 
 - _TBD_: class imbalance, small-object PPE, low-light footage, ...
+
+## Local versioning and backup
+
+The existing raw snapshot contains 8,099 files in each of `images`, `labels`,
+`meta-data`, and `voc_labels`, plus the two original split lists. DVC tracks these
+six outputs; Git stores only the corresponding `.dvc` pointers. Backing up this
+snapshot does not complete the licence audit, download/checksum script, class
+mapping, deduplication, or leakage checks tracked by Phase 1 issues.
+
+See [data versioning](data_versioning.md) for the external backup, restore
+commands, and a read-only full-object integrity verifier.

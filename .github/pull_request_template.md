@@ -48,6 +48,7 @@ tests and any manual checks (video, endpoint, container).
 - [ ] Tests added or updated for the change (regression test for bug fixes)
 - [ ] `make lint`, `make typecheck` and `make test` pass locally
 - [ ] No data, model weights, runs or `.env` files committed (see `.gitignore`)
+- [ ] DVC pointer changes are backed up and verified, if applicable
 - [ ] No secrets, credentials or personal data in code, logs, tests or docs
 - [ ] Configs in `configs/` and docs updated if behaviour or defaults changed
 - [ ] `CHANGELOG`/model card/dataset registry updated when relevant

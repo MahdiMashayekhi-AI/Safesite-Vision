@@ -181,7 +181,10 @@ These are hard rules — a PR that breaks them is rejected.
   `.engine`), training runs or experiment databases. `.gitignore` and the pre-commit
   `check-added-large-files` hook (500 KB) enforce this; `uv.lock` is the only large file
   that is committed.
-- Keep artefacts in `data/` and `models/`; both are ignored except for `.gitkeep`.
+- Keep artefacts in `data/` and `models/`; raw data is ignored. Git may contain
+  `.gitkeep`, DVC pointers and their ignore rules, never dataset bytes.
+- Follow [DVC backup and recovery](docs/data_versioning.md). Run `dvc push` before
+  publishing updated pointers; keep machine-specific remote paths in `.dvc/config.local`.
 - Every dataset needs a row in [`docs/datasets.md`](docs/datasets.md) with its **licence**,
   version, class mapping and commercial-use status *before* it is used in a PR.
 - Only use data whose licence permits the intended use. Do not add data with unclear
