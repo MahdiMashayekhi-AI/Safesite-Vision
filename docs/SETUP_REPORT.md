@@ -120,8 +120,11 @@ The local cache uses copies. Existing loose files and `archive.zip` on that driv
 are preserved; DVC objects live in its separate `files/md5` tree.
 
 The DVC push completed and cloud status reports the cache and external remote
-in sync. The independent full-object checksum verification is in progress; its
-final result will be recorded before this completion PR is merged.
+in sync. All **32,402 objects** (32,398 file objects plus four directory manifests)
+passed independent MD5 verification, covering **14,237,350,242 dataset bytes**.
+The read-only audit resumed after 10,000 logged successful checks against the
+same six pointer hashes; every remaining object was verified. The reusable
+verifier reads in creation order to reduce random HDD seeks.
 
 ```powershell
 uv run dvc status
@@ -157,7 +160,8 @@ board, while repository access remains write and never admin.
 | #56 CI and Docker build | Passed, including the Linux CPU assertion and security scan |
 | Protection `--verify-only` | All 22 checks passed |
 | Roadmap issue coverage | All #12-#44 present, no missing task |
-| DVC backup and final completion checks | Recorded after final verification below |
+| DVC workspace/cloud status and backup integrity | Backup synchronized; all 32,402 objects passed checksum validation |
+| Final completion CI/Docker | [PR #59 checks](https://github.com/MahdiMashayekhi-AI/Safesite-Vision/pull/59/checks) are required before merge |
 
 ## Remaining product work, outside bootstrap
 
