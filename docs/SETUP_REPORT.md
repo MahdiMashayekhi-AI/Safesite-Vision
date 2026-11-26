@@ -30,12 +30,15 @@ bootstrap and the maintainer's revised ownership and Python requirements.
 | #48 | #49 | `fix/48-protection-verify-fields` | Closed as superseded; the fix and regression tests shipped in #55 |
 | #52, #48 | #55 | `fix/52-owner-review-policy` | Owner review policy and safe protection verification; merged as `a01312d` |
 | #53 | #56 | `chore/53-development-quality` | Security/push hooks, Python 3.12, CPU builds and data ignores; merged as `2c99fe0` |
-| #54 | This completion PR | `chore/54-dvc-backup` | DVC tracking, external backup, roadmap board and final documentation |
+| #54 | #59 | `chore/54-dvc-backup` | DVC tracking, external backup, roadmap board and final documentation |
 
 PRs #50 and #51 were closed after their compatible updates were incorporated into
 #56 (setup-uv 10.4.0, Pydantic 2.14.4, Ruff 0.17.6 and FastAPI 0.165.0).
 The Python 3.15 Docker bump in #10 was closed intentionally: only 3.12 is supported.
 Dependabot now leaves Python minor/major image upgrades to deliberate review.
+Subsequent patch PRs #57 (PR-title action 6.1.3) and #58 (PyYAML 6.0.4 and
+Ultralytics 8.4.217) were reviewed and merged after green checks. The completion
+branch includes both updates.
 
 ## Ownership and main protection
 

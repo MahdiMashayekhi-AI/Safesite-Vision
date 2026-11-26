@@ -10,7 +10,6 @@ import argparse
 import hashlib
 import json
 import re
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import yaml
@@ -32,6 +31,16 @@ def check_object(remote: Path, digest: str) -> None:
         raise ValueError(f"Corrupt DVC backup object: {digest}")
 
 
+def storage_order(remote: Path, objects: set[str] | list[str]) -> list[str]:
+    """Read local HDD objects in creation order to reduce random seeks."""
+
+    def created(digest: str) -> tuple[int, str]:
+        stat = object_path(remote, digest).stat()
+        return getattr(stat, "st_birthtime_ns", stat.st_ctime_ns), digest
+
+    return sorted(objects, key=created)
+
+
 def verify(remote: Path, pointers: list[Path]) -> tuple[int, int]:
     """Verify manifests before following their file references, then all objects."""
     if not pointers:
@@ -50,11 +59,12 @@ def verify(remote: Path, pointers: list[Path]) -> tuple[int, int]:
                 check_object(remote, digest)
                 manifest = json.loads(object_path(remote, digest).read_text(encoding="utf-8"))
                 objects.update(item["md5"] for item in manifest)
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        results = pool.map(lambda digest: check_object(remote, digest), sorted(objects))
-        for count, _ in enumerate(results, 1):
-            if count % 5000 == 0:
-                print(f"Verified {count}/{len(objects)} objects", flush=True)
+    # One sequential reader avoids competing seeks on external HDDs.
+    print(f"Verifying {len(objects)} backup objects", flush=True)
+    for count, digest in enumerate(storage_order(remote, objects), 1):
+        check_object(remote, digest)
+        if count % 1000 == 0:
+            print(f"Verified {count}/{len(objects)} objects", flush=True)
     return len(objects), total_bytes
 
 
